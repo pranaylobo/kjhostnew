@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Get response is get sucess</h1> 
+    <h1>Post response is post sucess + the data that we are sending ie check at flask side</h1> 
+
+
+    <button id="get">Get request</button>
+    <button id="post">Post request</button>
+
+    <h1>Response from the server</h1> 
+    <h1 id="hello"></h1>
+</body>
+
+<script>
+
+// get request
+
+var get3 = document.getElementById("get");
+
+get3.addEventListener("click",get)
+
+
+var post3 = document.getElementById("post");
+
+post3.addEventListener("click",post)
+
+
+function post(){
+    // firebase get number
+    var xhr = new XMLHttpRequest();
+xhr.open("POST", "http://localhost:3000/postresponse", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+    input: '+919892571956',
+    body1:"hello KJ"
+}));
+xhr.onload = function() {
+  console.log("HELLO")
+  var data = this.responseText;
+  console.log(data);
+  document.getElementById('hello').innerHTML =data
+
+}
+
+  
+}
+
+function get()
+
+{
+    var xhr = new XMLHttpRequest();
+
+// Setup our listener to process compeleted requests
+xhr.onreadystatechange = function () {
+    console.log(xhr.status)
+
+    // Only run if the request is complete
+    if (xhr.readyState !== 4) return;
+
+    // Process our return data
+    if (xhr.status >= 200 && xhr.status < 300) {
+
+        // What do when the request is successful
+        console.log(xhr.responseText);
+
+        var get1 = xhr.responseText
+
+
+        document.getElementById('hello').innerHTML =get1
+    }
+};
+
+
+xhr.open('GET', 'http://localhost:3000/getresponse');
+xhr.send();
+
+}
+
+
+
+
+// post request
+
+
+
+
+</script>
+</html>
+
+
+
+<!-- firebase --> -> number   vanilla js ->button->number    twillo -> nodejs
